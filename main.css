@@ -1,0 +1,241 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
+    font-family: 'Press Start 2P', monospace;
+    background-color: #e779c4;
+    position: relative; 
+}
+
+.container {
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 50px; 
+    z-index: 20;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 100; 
+    border-radius: 50%; 
+    overflow: hidden; 
+}
+
+.loader img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    border-radius: 50%; 
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: none;
+    z-index: 50; 
+}
+
+img {
+    max-width: 150px;
+    display: block;
+    margin: 20px auto;
+}
+
+h1, h2, h6 {
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+button {
+    font-family: 'Press Start 2P', monospace;
+    margin: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background: linear-gradient(45deg, #e36bb1, #f069ba, #f03e9a);
+    border: 3px solid white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #dd4e9d, 0 0 20px #bf2c64, 0 0 30px #9a187a;
+    color: white;
+    position: relative;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background 0.5s ease-in-out;
+    z-index: 1;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 5px;
+    background: linear-gradient(45deg, rgba(182, 89, 143, 0.5), rgba(142, 68, 173, 0.7), rgba(123, 44, 191, 0.9));
+    filter: blur(4px);
+    z-index: -1;
+    transition: filter 0.3s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+    background: linear-gradient(45deg, #bf2ca6, #dd4ed4, #C77DFF);
+    box-shadow: 0 0 15px #dd4ead, 0 0 30px #bf2ca6, 0 0 45px #9a185d;
+}
+
+button:hover::before {
+    filter: blur(8px);
+}
+
+.spark {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: orange;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: spark-animation 0.6s ease-out forwards;
+    box-shadow: 0 0 10px yellow, 0 0 20px orange, 0 0 30px red;
+}
+
+@keyframes spark-animation {
+    from {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: translate(var(--spark-x, 0), var(--spark-y, 0)) scale(0.5);
+        opacity: 0;
+    }
+}
+
+#celebration h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: white;
+}
+
+.celebration-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+}
+
+.heart-gif {
+    width: 250px;
+    margin-top: 50px;
+}
+
+body.celebration-active {
+    background-image: url('heart-love.gif'), url('heart-love.gif'),
+                        url('heart-love.gif'), url('heart-love.gif');
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 50% 50%;
+    background-position: top left, top right, bottom left, bottom right;
+}
+
+.ground-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background-image: url('ground.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 10;
+}
+
+.sparkle-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('stars-sparkle.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    pointer-events: none; 
+    z-index: 1; 
+    opacity: 0.3;
+}
+
+/* Responsive styles for mobile devices */
+@media only screen and (max-width: 768px) {
+    /* Ensure normal zoom and adjust base font-size */
+    body, html {
+        zoom: 1 !important;
+        font-size: 14px;
+        /* Center content vertically and horizontally */
+        display: flex;
+        margin-top: 200px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow-y: auto;  /* Auto scroll if content exceeds viewport */
+    }
+    
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    /* Scale down headings */
+    h1, h2, h6 {
+        font-size: 1.2rem;
+    }
+    
+    /* Adjust buttons for smaller screens */
+    button {
+        font-size: 0.8em;
+        margin: 10px;
+        padding: 8px 15px;
+    }
+    
+    /* Reduce image sizes while keeping them side by side */
+    img {
+        max-width: 80px;
+        margin: 10px auto;
+    }
+    
+    /* Adjust loader size */
+    .loader {
+        width: 80px;
+        height: 80px;
+    }
+    
+    /* Adjust celebration text size */
+    #celebration h2 {
+        font-size: 2rem;
+    }
+    
+    /* Ensure rows remain horizontal (side by side) */
+    .celebration-row {
+        flex-wrap: nowrap;
+    }
+    
+    /* Adjust footer height */
+    .ground-footer {
+        height: 100px;
+    }
+  }
+  

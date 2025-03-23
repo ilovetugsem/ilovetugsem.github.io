@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ILOVETUGSEMMM!!!</title>
+  <link rel="icon" type="image/jpeg" href="bibble.gif"> 
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div class="sparkle-background"></div> 
+  <div class="overlay"></div> 
+  <div class="loader"><img src="loader.gif" alt="Loading..."></div>
+  <div class="container">
+    <div class="question-area">
+      <div class="celebration-row">
+        <img src="cutest-white-cat.gif" style="height: 100px; width: 100px;" alt="Hello Kitty" class="hello-kitty">
+        <img src="happy.gif" alt="neko">
+        <img src="hellokitty.gif" style="border-radius: 10px;" alt="Peach and Goma" class="left-image">
+      </div>
+      <div>
+        <h1>SELAMMM DUNYANIN EN GUZEL KIZI SEN MISIN?</h1>
+        <button id="no-btn">Hayır</button>
+        <button id="yes-btn">Evet</button>
+      </div>
+      <div class="celebration-row">
+        <img src="studio-ghibli-ponyo-on-the-cliff.gif" alt="">
+        <img src="rose-cat-give-give-rose-to-cat.gif" alt="Rose Cat" class="right-image" style="border-radius: 5px;">
+        <img src="cattt.gif" alt="">
+      </div>
+    </div>
+    <div id="celebration" class="hidden" style="margin-top: 100px;">
+      <div class="celebration-row">
+        <img src="cute-cat.gif" alt="Bibble" class="bibble" style="border-radius: 5px;">
+        <img src="my-melody.gif" alt="Kakashi" >
+        <img src="sanrio.gif" alt="Cute Cat" class="cute-cat">
+      </div>
+      <div>
+        <h1>EVETT KESINLIKLE OYLESINNN!!!</h1>
+      </div>
+      <div class="celebration-row">
+        <img src="white-cute-cat-hearts.gif" alt="White Cute Cat" class="white-cute-cat-heart">
+        <img src="cat-jump.gif" alt="cat jump" style="width: 200px;">
+        <img src="heart.gif" alt="Heart" class="heart-gif">
+      </div>
+    </div>        
+  </div>
+  <div class="ground-footer"></div> 
+
+  <audio id="celebration-sound" src="yippie.mp3" loop></audio>
+
+  <script>
+    // Adjust zoom based on screen width
+    function adjustZoom() {
+      if (window.innerWidth > 768) {
+        document.body.style.zoom = "1.30";
+      } else {
+        document.body.style.zoom = "1.0";
+      }
+    }
+    adjustZoom();
+    window.addEventListener('resize', adjustZoom);
+
+    document.getElementById('yes-btn').addEventListener('mouseover', createSparks);
+    function createSparks() {
+      for (let i = 0; i < 20; i++) { 
+        const spark = document.createElement('div');
+        spark.classList.add('spark');
+
+        const angle = Math.random() * 2 * Math.PI; 
+        const radius = Math.random() * 50 + 20; 
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+
+        spark.style.setProperty('--spark-x', `${x}px`);
+        spark.style.setProperty('--spark-y', `${y}px`);
+
+        const rect = document.getElementById('yes-btn').getBoundingClientRect();
+        spark.style.left = `${rect.left + rect.width / 2}px`;
+        spark.style.top = `${rect.top + rect.height / 2}px`;
+
+        document.body.appendChild(spark);
+
+        setTimeout(() => {
+          spark.remove();
+        }, 600); 
+      }
+    }
+    document.getElementById('no-btn').addEventListener('mouseover', function() {
+      const buttonWidth = this.offsetWidth;
+      const buttonHeight = this.offsetHeight;
+      
+      const minMargin = 20;
+      
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      
+      const maxX = screenWidth - buttonWidth - minMargin;
+      const maxY = screenHeight - buttonHeight - minMargin;
+
+      const x = Math.random() * (maxX - minMargin) + minMargin;
+      const y = Math.random() * (maxY - minMargin) + minMargin;
+      
+      this.style.position = 'fixed';
+      this.style.left = `${x}px`;
+      this.style.top = `${y}px`;
+    });
+
+    document.getElementById('yes-btn').addEventListener('click', function() {
+      const overlay = document.querySelector('.overlay');
+      const loader = document.querySelector('.loader');
+      const celebration = document.getElementById('celebration');
+      const questionArea = document.querySelector('.question-area');
+      const audio = document.getElementById('celebration-sound'); 
+
+      overlay.style.display = 'block'; 
+      loader.style.display = 'block'; 
+
+      setTimeout(function() {
+        loader.style.display = 'none'; 
+        overlay.style.display = 'none'; 
+        questionArea.style.display = 'none'; 
+        celebration.style.display = 'block'; 
+        document.body.classList.add('celebration-active'); 
+
+        audio.play();
+
+        setTimeout(function() {
+          audio.pause();
+          audio.currentTime = 0;
+        }, 10000);
+
+      }, 3200); 
+    });
+  </script>
+</body>
+</html>
